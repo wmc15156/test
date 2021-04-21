@@ -8,12 +8,34 @@ function App() {
   const [content, setContent] = useState("");
   const [id, setId] = useState("");
 
+  const [updateId, setUpdateId] = useState("");
+  const [updateContent, setUpdateContent] = useState("");
+
   const onChangeHandler = (e) => {
     setContent(e.target.value);
   };
 
   const onChangeId = (e) => {
     setId(e.target.value);
+  };
+
+  const onChangeUpdateId = (e) => {
+    setUpdateId(e.target.value);
+  };
+
+  const onChangeUpdateContent = (e) => {
+    setUpdateContent(e.target.value);
+  };
+
+  const update = () => {
+    axios
+      .patch(`/posts/${updateId}`, { data: updateContent })
+      .then((res) => {
+        alert("수정성공 새로고침 후 데이터 확인");
+      })
+      .catch((err) => {
+        alert(err.response.data);
+      });
   };
 
   const onSubmitHandler = (e) => {
@@ -66,6 +88,10 @@ function App() {
       });
   };
 
+  const updateHandler = () => {
+    axios.patch("/");
+  };
+
   useEffect(() => {
     axios.get("/posts").then((res) => {
       setPosts(res.data.data);
@@ -109,7 +135,7 @@ function App() {
           textAlign: "center",
         }}
       >
-        <h2>DB에 데이터 생성</h2>
+        <h2>데이터 생성</h2>
         <form onSubmit={onSubmitHandler}>
           <input
             placeholder={"내용을 입력해주세요"}
@@ -118,6 +144,52 @@ function App() {
           />
           <button>create</button>
         </form>
+      </div>
+
+      <div
+        style={{
+          width: "580px",
+          margin: "0 auto",
+          marginBottom: "100px",
+          textAlign: "center",
+        }}
+      >
+        <h2>데이터 수정</h2>
+        <h4>수정 할 ID와 내용을 입력해주세요.</h4>
+        <div>
+          <label
+            htmlFor={"id"}
+            style={{
+              marginRight: "10px",
+              width: "60px",
+              display: "inline-block",
+              marginBottom: "20px",
+            }}
+          >
+            id
+          </label>
+          <input id={"id"} onChange={onChangeUpdateId} value={updateId} />
+        </div>
+
+        <div>
+          <label
+            htmlFor={"content"}
+            style={{
+              marginRight: "10px",
+              width: "60px",
+              display: "inline-block",
+              marginBottom: "20px",
+            }}
+          >
+            content
+          </label>
+          <input
+            id={"content"}
+            onChange={onChangeUpdateContent}
+            value={updateContent}
+          />
+        </div>
+        <button onClick={update}>수정하기</button>
       </div>
 
       <div
