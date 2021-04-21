@@ -27,6 +27,7 @@
 
 - 환경변수 주입 필요(DB,JWT)
   - .env 파일에 환경변수 관리(git에는 업로드 X)
+  - back > .env.example 참고
 
 
 - ```npm run dev```
