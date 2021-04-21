@@ -5,8 +5,7 @@
   
 
 - ```npm start```
-    - ```npm start```에러 발생 시 환경변수 설정 필요
-    - terminal창에 ```export SKIP_PREFLIGHT_CHECK=true ``` 입력
+    - ```npm start```에러 발생 시 terminal창에 ```export SKIP_PREFLIGHT_CHECK=true ```환경변수 설정
 
 
 - http://localhost:3000
